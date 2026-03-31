@@ -15,7 +15,7 @@ export async function registerController(req, res) {
     });
   }
 
-  const hashPass = await bcrypt.hash(password, 10);
+  const hashPass = await bcrypt.hash(password, 10)
 
   const user = await userModel.create({
     username,
@@ -87,5 +87,14 @@ export async function getMeController(req, res) {
 
   res.status(200).json({
     user,
+  });
+}
+
+export async function logOutController(req, res) {
+
+  res.clearCookie('token');
+
+  res.status(200).json({
+    message: "token deleted successfully",
   });
 }
